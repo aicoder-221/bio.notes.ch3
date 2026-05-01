@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧬 Reproductive Health — NCERT Study Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f1a;
+    --card: #16172a;
+    --card2: #1c1e35;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8eaf6;
+    --muted: #8b8fa8;
+    --t1: #ff6b9d; --t1bg: rgba(255,107,157,0.12);
+    --t2: #ffc857; --t2bg: rgba(255,200,87,0.12);
+    --t3: #4ecdc4; --t3bg: rgba(78,205,196,0.12);
+    --t4: #a78bfa; --t4bg: rgba(167,139,250,0.12);
+    --t5: #f97316; --t5bg: rgba(249,115,22,0.12);
+    --green: #4ade80; --greenbg: rgba(74,222,128,0.12);
+    --red: #f87171;  --redbg: rgba(248,113,113,0.12);
+    --blue: #60a5fa; --bluebg: rgba(96,165,250,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #1a1b3a 0%, #0e0f1a 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px 0;
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .header-top {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+  }
+  .header-top h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.45rem; font-weight: 800; letter-spacing: -0.5px;
+    background: linear-gradient(90deg, #ff6b9d, #a78bfa, #4ecdc4);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .badge {
+    background: var(--t4bg); color: var(--t4);
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 1px;
+    padding: 3px 10px; border-radius: 20px;
+    border: 1px solid rgba(167,139,250,0.25);
+    white-space: nowrap;
+  }
+  /* TABS */
+  .tabs-row {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 4px; overflow-x: auto;
+    padding-bottom: 0; scrollbar-width: none;
+  }
+  .tabs-row::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem; font-weight: 500;
+    padding: 10px 16px; border-radius: 10px 10px 0 0;
+    white-space: nowrap; transition: all .2s;
+    border: 1px solid transparent; border-bottom: none;
+    position: relative; top: 1px;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--card2); }
+  .tab-btn.active {
+    color: var(--text); background: var(--card);
+    border-color: var(--border);
+  }
+  .tab-btn.t1.active { color: var(--t1); }
+  .tab-btn.t2.active { color: var(--t2); }
+  .tab-btn.t3.active { color: var(--t3); }
+  .tab-btn.t4.active { color: var(--t4); }
+  .tab-btn.t5.active { color: var(--t5); }
+
+  /* CONTENT */
+  .content-area { max-width: 900px; margin: 0 auto; padding: 28px 16px 0; }
+  .tab-panel { display: none; animation: fadeIn .3s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+  /* SECTION BLOCKS */
+  .section { margin-bottom: 20px; }
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 18px;
+    border-radius: 12px 12px 0 0;
+    cursor: pointer; user-select: none;
+    border: 1px solid var(--border);
+    background: var(--card2);
+    transition: all .2s;
+  }
+  .section-header:hover { filter: brightness(1.1); }
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem; font-weight: 700; flex: 1;
+  }
+  .chevron { font-size: 0.75rem; color: var(--muted); transition: transform .25s; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body {
+    background: var(--card);
+    border: 1px solid var(--border); border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 20px;
+    display: none;
+  }
+  .section.open .section-body { display: block; }
+
+  /* CHIPS */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .chip {
+    font-size: 0.75rem; font-weight: 600;
+    padding: 4px 12px; border-radius: 20px;
+    border: 1px solid transparent;
+  }
+  .chip-green { background: var(--greenbg); color: var(--green); border-color: rgba(74,222,128,0.2); }
+  .chip-red { background: var(--redbg); color: var(--red); border-color: rgba(248,113,113,0.2); }
+  .chip-blue { background: var(--bluebg); color: var(--blue); border-color: rgba(96,165,250,0.2); }
+  .chip-t1 { background: var(--t1bg); color: var(--t1); border-color: rgba(255,107,157,0.2); }
+  .chip-t2 { background: var(--t2bg); color: var(--t2); border-color: rgba(255,200,87,0.2); }
+  .chip-t3 { background: var(--t3bg); color: var(--t3); border-color: rgba(78,205,196,0.2); }
+  .chip-t4 { background: var(--t4bg); color: var(--t4); border-color: rgba(167,139,250,0.2); }
+  .chip-t5 { background: var(--t5bg); color: var(--t5); border-color: rgba(249,115,22,0.2); }
+
+  /* POINTS */
+  ul.pts { list-style: none; padding: 0; }
+  ul.pts li { padding: 5px 0 5px 22px; position: relative; font-size: 0.88rem; line-height: 1.55; color: var(--text); border-bottom: 1px solid rgba(255,255,255,0.04); }
+  ul.pts li:last-child { border-bottom: none; }
+  ul.pts li::before { content: "▸"; position: absolute; left: 0; color: var(--muted); font-size: 0.7rem; top: 7px; }
+
+  /* DEFINITION BOX */
+  .def-box {
+    border-left: 3px solid var(--t3);
+    background: var(--t3bg);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px; margin: 12px 0;
+    font-size: 0.87rem; line-height: 1.6;
+  }
+  .def-box strong { color: var(--t3); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.8px; display: block; margin-bottom: 4px; }
+
+  /* HIGHLIGHT BOX */
+  .hi-box {
+    border-radius: 10px; padding: 12px 16px;
+    margin: 12px 0; font-size: 0.87rem; line-height: 1.6;
+  }
+  .hi-yellow { background: var(--t2bg); border: 1px solid rgba(255,200,87,0.2); }
+  .hi-red { background: var(--redbg); border: 1px solid rgba(248,113,113,0.2); }
+  .hi-green { background: var(--greenbg); border: 1px solid rgba(74,222,128,0.2); }
+  .hi-purple { background: var(--t4bg); border: 1px solid rgba(167,139,250,0.2); }
+  .hi-blue { background: var(--bluebg); border: 1px solid rgba(96,165,250,0.2); }
+  .hi-orange { background: var(--t5bg); border: 1px solid rgba(249,115,22,0.2); }
+
+  /* STAR FACT */
+  .star-fact {
+    display: flex; gap: 10px; align-items: flex-start;
+    background: rgba(255,200,87,0.07); border: 1px solid rgba(255,200,87,0.2);
+    border-radius: 10px; padding: 10px 14px; margin: 8px 0;
+    font-size: 0.86rem; line-height: 1.55;
+  }
+  .star-fact .ico { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* TABLE */
+  .tbl { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.83rem; }
+  .tbl th { background: var(--card2); padding: 9px 12px; text-align: left; font-weight: 600; border: 1px solid var(--border); }
+  .tbl td { padding: 8px 12px; border: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .tbl tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  /* SUBTITLE */
+  .sub { font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 18px 0 8px; }
+
+  /* EXAM Q BOX */
+  .eq-box {
+    background: var(--card2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 18px; margin: 8px 0;
+  }
+  .eq-box p { font-size: 0.85rem; line-height: 1.55; color: var(--text); }
+  .eq-num { color: var(--t4); font-weight: 700; font-family: 'Syne', sans-serif; margin-right: 6px; }
+
+  /* SUMMARY BOX */
+  .summary-box {
+    background: linear-gradient(135deg, rgba(167,139,250,0.08), rgba(78,205,196,0.08));
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 14px; padding: 20px; margin-top: 10px;
+  }
+  .summary-box h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: var(--t4); }
+
+  /* GRID 2 */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  @media(max-width:580px) { .grid2 { grid-template-columns: 1fr; } }
+  .mini-card {
+    background: var(--card2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px;
+  }
+  .mini-card h4 { font-family: 'Syne', sans-serif; font-size: 0.82rem; font-weight: 700; margin-bottom: 8px; }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; padding: 2px 8px; border-radius: 6px; margin-right: 6px; }
+  .tag-ncert { background: rgba(255,200,87,0.15); color: var(--t2); }
+  .tag-imp { background: rgba(248,113,113,0.15); color: var(--red); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <h1>🧬 Reproductive Health — NCERT Notes</h1>
+    <span class="badge">CLASS XII · BIOLOGY</span>
+  </div>
+  <div class="tabs-row" id="tabsRow">
+    <button class="tab-btn t1 active" onclick="showTab('t1',this)">🌸 Repro Health</button>
+    <button class="tab-btn t2" onclick="showTab('t2',this)">👨‍👩‍👦 Population</button>
+    <button class="tab-btn t3" onclick="showTab('t3',this)">🛡️ Contraception</button>
+    <button class="tab-btn t4" onclick="showTab('t4',this)">⚖️ MTP & STIs</button>
+    <button class="tab-btn t5" onclick="showTab('t5',this)">🔬 ARTs</button>
+    <button class="tab-btn" onclick="showTab('exam',this)">📝 Exam Qs</button>
+  </div>
+</div>
+
+<div class="content-area">
+
+<!-- ══════════════ TAB 1: REPRODUCTIVE HEALTH ══════════════ -->
+<div id="t1" class="tab-panel active">
+
+  <div class="section open">
+    <div class="section-header" style="background:linear-gradient(90deg,rgba(255,107,157,0.15),transparent);" onclick="toggle(this)">
+      <span>🌸</span><h2 style="color:var(--t1)">Definition of Reproductive Health</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><strong>📖 Definition</strong>A state of physical, emotional, and behavioral well-being in all matters related to the reproductive system.</div>
+      <div class="hi-red"><span class="tag tag-imp">Important</span> NOT just absence of disease!</div>
+      <div class="sub" style="color:var(--t1)">It includes:</div>
+      <div class="chips">
+        <span class="chip chip-t1">✅ Healthy reproductive organs</span>
+        <span class="chip chip-t1">✅ Safe & satisfying sex life</span>
+        <span class="chip chip-t1">✅ Freedom from STIs</span>
+        <span class="chip chip-t1">✅ Ability to reproduce if desired</span>
+        <span class="chip chip-t1">✅ Knowledge of contraception</span>
+        <span class="chip chip-t1">✅ Emotional maturity</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>❓</span><h2>Why Reproductive Health is Needed</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <table class="tbl">
+        <tr><th>#</th><th>Reason</th><th>Key Point</th></tr>
+        <tr><td>1</td><td>Population control</td><td>India's huge population → awareness needed</td></tr>
+        <tr><td>2</td><td>Prevent STIs/RTIs</td><td>HIV, gonorrhea, syphilis prevention</td></tr>
+        <tr><td>3</td><td>Maternal & infant health</td><td>↓ maternal mortality, ↓ infant mortality</td></tr>
+        <tr><td>4</td><td>Avoid unsafe abortions</td><td>Need for MTP laws & awareness</td></tr>
+        <tr><td>5</td><td>Gender equality</td><td>Prevent exploitation, abuse, violence</td></tr>
+        <tr><td>6</td><td>Contraception awareness</td><td>Spacing births, preventing unwanted pregnancy</td></tr>
+        <tr><td>7</td><td>Infertility support</td><td>Awareness of ARTs (IVF, ICSI etc.)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🏛️</span><h2>Government Initiatives</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="star-fact"><span class="ico">⭐</span><div><strong>India = FIRST country in the world to start a national family planning programme (1951)</strong> — extremely high-yield exam fact!</div></div>
+      <ul class="pts">
+        <li><strong>Family Planning Programme (1951)</strong> — contraceptive awareness, sterilization, spacing methods</li>
+        <li><strong>RCH Programme</strong> — safe pregnancy, delivery, immunization, STI control, contraceptive availability</li>
+        <li><strong>Sex education in schools</strong> — healthy attitudes, STI awareness, avoiding teen pregnancy, busting myths</li>
+        <li><strong>Awareness campaigns</strong> — mass media, posters, songs, demonstrations, counselling by govt + NGOs</li>
+        <li><strong>Hospitals & clinics upgraded</strong> — MCH care, prenatal & postnatal care, safe deliveries</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>📊</span><h2>Outcomes of Reproductive Health Awareness</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="chips">
+        <span class="chip chip-green">↓ Infant mortality</span>
+        <span class="chip chip-green">↓ Maternal mortality</span>
+        <span class="chip chip-green">↓ STI spread</span>
+        <span class="chip chip-green">↓ Sexual assault</span>
+        <span class="chip chip-green">↓ Unwanted pregnancy</span>
+        <span class="chip chip-green">↑ Quality of life</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /t1 -->
+
+
+<!-- ══════════════ TAB 2: POPULATION ══════════════ -->
+<div id="t2" class="tab-panel">
+
+  <div class="section open">
+    <div class="section-header" style="background:linear-gradient(90deg,rgba(255,200,87,0.12),transparent);" onclick="toggle(this)">
+      <span>📈</span><h2 style="color:var(--t2)">Population Explosion</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><strong>📖 Definition</strong>Rapid & uncontrolled rise in human population in a short time.</div>
+      <div class="grid2">
+        <div class="mini-card hi-yellow">
+          <h4 style="color:var(--t2)">📊 NCERT Data</h4>
+          <ul class="pts">
+            <li>At independence (1947) → ~350 million</li>
+            <li>By year 2000 → crossed <strong>1 billion</strong> (100 crores)</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h4 style="color:var(--red)">⚠️ Causes</h4>
+          <ul class="pts">
+            <li>↓ Death rate</li>
+            <li>↓ Maternal mortality rate</li>
+            <li>↓ Infant mortality rate</li>
+            <li>Better healthcare, vaccines, nutrition</li>
+            <li>Birth rate did NOT decrease proportionally</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>⚖️</span><h2>Population Stabilization</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><strong>📖 Definition</strong>Achieving a level where <strong>birth rate ≈ death rate</strong>, so population stops rising sharply.</div>
+      <div class="sub" style="color:var(--t2)">Government Measures</div>
+      <ul class="pts">
+        <li><strong>Family Planning Programme (1951)</strong> — 1st country globally; contraception, birth spacing, small-family norms</li>
+        <li><strong>Awareness & Contraception</strong> — TV, radio, posters, health workers; promote small family & delayed marriage</li>
+        <li><strong>Incentives</strong> — monetary rewards for adopting small family norms</li>
+        <li><strong>RCH Programme</strong> — mother & child health, safe deliveries, contraceptive availability</li>
+        <li><strong>Delayed Marriage</strong> — shorter reproductive life → fewer children</li>
+        <li><strong>Female Education</strong> — educated women plan families, understand contraception, avoid early pregnancy</li>
+      </ul>
+      <div class="hi-green" style="margin-top:12px;font-size:0.86rem;">✅ <strong>Outcome:</strong> Growth rate is slowing; India is moving toward population stabilization.</div>
+    </div>
+  </div>
+
+</div><!-- /t2 -->
+
+
+<!-- ══════════════ TAB 3: CONTRACEPTION ══════════════ -->
+<div id="t3" class="tab-panel">
+
+  <div class="section open">
+    <div class="section-header" style="background:linear-gradient(90deg,rgba(78,205,196,0.12),transparent);" onclick="toggle(this)">
+      <span>📖</span><h2 style="color:var(--t3)">Definition & Ideal Contraceptive</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><strong>📖 Definition</strong>Methods to prevent pregnancy by preventing gamete release / fertilization / implantation.</div>
+      <div class="sub" style="color:var(--t3)">Ideal Contraceptive Should Be:</div>
+      <div class="chips">
+        <span class="chip chip-t3">User-friendly</span>
+        <span class="chip chip-t3">Easily available</span>
+        <span class="chip chip-t3">Reversible</span>
+        <span class="chip chip-t3">No side effects</span>
+        <span class="chip chip-t3">Not affect sexual drive</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🌿</span><h2>A. Natural Methods</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:10px;">No drugs, no devices. Prevent chance meeting of sperm & ovum.</p>
+      <table class="tbl">
+        <tr><th>Method</th><th>Mechanism</th><th>Note</th></tr>
+        <tr><td>Periodic Abstinence</td><td>Avoid sex during fertile window (days 10–17)</td><td>Ovulation avoidance</td></tr>
+        <tr><td>Withdrawal / Coitus Interruptus</td><td>Male withdraws before ejaculation</td><td>High failure risk</td></tr>
+        <tr><td>Lactational Amenorrhea</td><td>Intense breastfeeding → prolactin → no ovulation</td><td>Only up to <strong>6 months</strong> postpartum</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🛡️</span><h2>B. Barrier Methods</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:10px;">Physically prevent sperm from reaching ovum.</p>
+      <ul class="pts">
+        <li><strong>Condoms</strong> — male (penis) or female (vagina); prevent pregnancy + <strong>STIs</strong>; disposable</li>
+        <li><strong>Diaphragm / Cervical cap / Vaults</strong> — rubber devices inserted into female tract; block cervix; reusable</li>
+      </ul>
+      <div class="star-fact"><span class="ico">⭐</span><div>Only condoms provide <strong>dual protection</strong> — contraception + STI prevention.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🌀</span><h2>C. IUDs (Intrauterine Devices)</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="star-fact"><span class="ico">⭐</span><div><strong>IUDs are the most widely used contraceptive method in India.</strong></div></div>
+      <table class="tbl">
+        <tr><th>Type</th><th>Examples</th><th>Mechanism</th></tr>
+        <tr><td>Non-medicated</td><td>Lippes Loop</td><td>Physical barrier in uterus</td></tr>
+        <tr><td>Copper-releasing</td><td>Cu-T, Cu-7, Multiload 375</td><td>Release Cu²⁺ → ↓ sperm motility, ↓ fertilizing capacity</td></tr>
+        <tr><td>Hormone-releasing</td><td>Progestasert, LNG-20</td><td>Thicken cervical mucus + inhibit ovulation + inhibit implantation</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>💊</span><h2>D. Oral Contraceptives (Pills)</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <table class="tbl">
+        <tr><th>Type</th><th>Composition</th><th>Mechanism / Use</th></tr>
+        <tr><td>Combined pills</td><td>Estrogen + Progesterone</td><td>Inhibit ovulation, alter cervical mucus; taken 21 days + 7-day break</td></tr>
+        <tr><td>Mini pills</td><td>Only progesterone</td><td>Thicken mucus, inhibit implantation</td></tr>
+        <tr><td>Emergency contraceptives</td><td>High-dose hormones</td><td>Within <strong>72 hours</strong> of unprotected sex; prevent ovulation + implantation</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>💉</span><h2>E. Injectables & Implants</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="pts">
+        <li><strong>Injectables</strong> — intramuscular; long-acting; contain progesterone ± estrogen</li>
+        <li><strong>Implants</strong> — placed under skin on arm</li>
+        <li><strong>Mechanism</strong> — prevent ovulation + thicken cervical mucus + inhibit implantation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>✂️</span><h2>F. Surgical Methods (Sterilization)</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4 style="color:var(--blue)">♂ Vasectomy (Male)</h4>
+          <ul class="pts">
+            <li>Small cut in scrotum</li>
+            <li>Vas deferens cut + tied</li>
+            <li>No sperm in ejaculate</li>
+            <li>Does NOT affect hormones or sex drive</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h4 style="color:var(--t1)">♀ Tubectomy (Female)</h4>
+          <ul class="pts">
+            <li>Fallopian tubes cut & tied</li>
+            <li>Prevents ovum from reaching uterus</li>
+            <li>Prevents sperm from reaching ovum</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hi-purple" style="margin-top:12px;font-size:0.85rem;">Both are <strong>permanent</strong> methods of contraception.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>✅</span><h2>Benefits & Common Misconceptions</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="chips" style="margin-bottom:14px;">
+        <span class="chip chip-green">Controls population growth</span>
+        <span class="chip chip-green">Reduces unwanted pregnancies</span>
+        <span class="chip chip-green">Reduces abortions</span>
+        <span class="chip chip-green">Helps birth spacing</span>
+        <span class="chip chip-green">Prevents STIs (condoms)</span>
+      </div>
+      <div class="sub">Misconceptions Clarified (NCERT)</div>
+      <ul class="pts">
+        <li>Condoms do NOT significantly reduce sexual pleasure</li>
+        <li>Oral pills do NOT cause infertility if used properly</li>
+        <li>IUDs do NOT interfere with intercourse</li>
+        <li>Breastfeeding works only for <strong>6 months</strong>, not longer</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /t3 -->
+
+
+<!-- ══════════════ TAB 4: MTP & STIs ══════════════ -->
+<div id="t4" class="tab-panel">
+
+  <!-- MTP -->
+  <div class="section open">
+    <div class="section-header" style="background:linear-gradient(90deg,rgba(167,139,250,0.12),transparent);" onclick="toggle(this)">
+      <span>⚖️</span><h2 style="color:var(--t4)">Medical Termination of Pregnancy (MTP)</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><strong>📖 Definition</strong>Intentional termination of pregnancy using medical or surgical methods.</div>
+      <div class="sub" style="color:var(--t4)">Reasons for MTP</div>
+      <ul class="pts">
+        <li>Unwanted pregnancy (contraceptive failure, unplanned, or <strong>rape</strong>)</li>
+        <li>Risk to mother's health / life-threatening conditions</li>
+        <li>Foetal abnormalities — congenital defects, genetic disorders</li>
+      </ul>
+      <div class="sub" style="color:var(--t4)">Legal Status</div>
+      <div class="hi-purple">
+        <ul class="pts">
+          <li>Legal in India under the <strong>MTP Act, 1971</strong></li>
+          <li>Permissible up to <strong>20 weeks</strong> (NCERT text figure)</li>
+          <li>Only by qualified & registered practitioners</li>
+          <li>Only in approved hospitals / clinics</li>
+        </ul>
+      </div>
+      <div class="sub" style="color:var(--red)">Safety Timeline</div>
+      <div class="grid2">
+        <div class="mini-card hi-green"><h4 style="color:var(--green)">✅ 1st Trimester</h4><p style="font-size:0.83rem;">Safer — recommended timing for MTP</p></div>
+        <div class="mini-card hi-red"><h4 style="color:var(--red)">⚠️ 2nd Trimester</h4><p style="font-size:0.83rem;">Riskier — complications higher</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🚨</span><h2>Female Foeticide & Misuse of MTP</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="hi-red">
+        <p style="font-size:0.87rem;line-height:1.6;"><span class="tag tag-imp">High Yield</span> Misuse of <strong>amniocentesis + ultrasound</strong> to determine sex → sex-selective abortions → <strong>female foeticide</strong> → declining sex ratio in India.</p>
+      </div>
+      <div class="star-fact"><span class="ico">⚖️</span><div><strong>PCPNDT Act (1994)</strong> — Pre-Conception & Pre-Natal Diagnostic Techniques Act — bans sex determination before birth.</div></div>
+      <div class="sub">Complications of Unsafe MTP</div>
+      <div class="chips">
+        <span class="chip chip-red">Bleeding</span>
+        <span class="chip chip-red">Infection</span>
+        <span class="chip chip-red">Infertility</span>
+        <span class="chip chip-red">Death</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- STIs -->
+  <div class="section open">
+    <div class="section-header" style="background:linear-gradient(90deg,rgba(248,113,113,0.12),transparent);" onclick="toggle(this)">
+      <span>🦠</span><h2 style="color:var(--red)">STIs / RTIs — Sexually Transmitted Infections</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><strong>📖 Definition</strong>Infections transmitted through sexual contact with an infected person. Earlier called VDs (Venereal Diseases) or STDs.</div>
+      <div class="sub" style="color:var(--red)">NCERT Classification</div>
+      <table class="tbl">
+        <tr><th>Type</th><th>Examples</th></tr>
+        <tr><td>Bacterial</td><td>Gonorrhoea, Syphilis, Chlamydiasis</td></tr>
+        <tr><td>Viral</td><td>HIV/AIDS, Genital Herpes (HSV), Genital Warts (HPV)</td></tr>
+        <tr><td>Protozoan</td><td>Trichomoniasis</td></tr>
+        <tr><td>Fungi</td><td>Candidiasis</td></tr>
+        <tr><td>Ectoparasitic</td><td>Pubic lice (Pediculosis), Scabies</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🔀</span><h2>Transmission, Symptoms & Complications</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="sub">Modes of Transmission</div>
+      <div class="chips">
+        <span class="chip chip-red">Sexual intercourse</span>
+        <span class="chip chip-red">Shared needles</span>
+        <span class="chip chip-red">Blood transfusion</span>
+        <span class="chip chip-red">Mother to child (birth/pregnancy)</span>
+      </div>
+      <div class="star-fact" style="margin-top:12px;"><span class="ico">⚠️</span><div><strong>"Early symptoms are often absent or easily overlooked"</strong> — key NCERT line. People don't realize they're infected.</div></div>
+      <div class="sub">When Symptoms Appear:</div>
+      <div class="chips">
+        <span class="chip chip-t2">Itching</span>
+        <span class="chip chip-t2">Fluid discharge</span>
+        <span class="chip chip-t2">Slight pain</span>
+        <span class="chip chip-t2">Swelling</span>
+        <span class="chip chip-t2">Irritation in genital area</span>
+      </div>
+      <div class="sub">Complications if Untreated</div>
+      <ul class="pts">
+        <li><strong>Gonorrhoea & Syphilis →</strong> PID, infertility, stillbirths, organ damage</li>
+        <li><strong>HIV →</strong> AIDS — life-threatening immune deficiency</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>💊</span><h2>Prevention & Treatment</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="mini-card">
+          <h4 style="color:var(--green)">Prevention</h4>
+          <ul class="pts">
+            <li>Avoid sex with multiple partners</li>
+            <li>Use condoms</li>
+            <li>Early detection / consult doctors</li>
+            <li>Safe blood transfusions</li>
+            <li>Avoid sharing needles</li>
+          </ul>
+        </div>
+        <div class="mini-card">
+          <h4 style="color:var(--blue)">Treatment</h4>
+          <ul class="pts">
+            <li>Bacterial / Fungal / Protozoan → <strong>Curable</strong></li>
+            <li>Viral (HIV, Herpes, HPV) → <strong>No cure, only management</strong></li>
+          </ul>
+          <div class="hi-red" style="margin-top:8px;font-size:0.82rem;"><span class="tag tag-imp">IMP</span> Viral infections cannot be cured completely.</div>
+        </div>
+      </div>
+      <div class="star-fact" style="margin-top:12px;"><span class="ico">🏫</span><div>Adolescents are high-risk (lack of awareness + peer pressure). NCERT emphasizes <strong>sex education in schools</strong>.</div></div>
+    </div>
+  </div>
+
+</div><!-- /t4 -->
+
+
+<!-- ══════════════ TAB 5: ARTs ══════════════ -->
+<div id="t5" class="tab-panel">
+
+  <div class="section open">
+    <div class="section-header" style="background:linear-gradient(90deg,rgba(249,115,22,0.12),transparent);" onclick="toggle(this)">
+      <span>🔬</span><h2 style="color:var(--t5)">Infertility — Definition & Causes</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="def-box"><strong>📖 Definition</strong>Inability of a couple to conceive after <strong>1 year</strong> of regular unprotected sexual intercourse.</div>
+      <div class="sub" style="color:var(--t5)">Causes</div>
+      <div class="chips">
+        <span class="chip chip-t5">Physical problems</span>
+        <span class="chip chip-t5">Congenital defects</span>
+        <span class="chip chip-t5">Hormonal imbalance</span>
+        <span class="chip chip-t5">Immunological issues</span>
+        <span class="chip chip-t5">Psychological factors</span>
+        <span class="chip chip-t5">Age-related issues</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🧪</span><h2>IVF, ZIFT & IUT</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="mini-card hi-orange" style="margin-bottom:12px;">
+        <h4 style="color:var(--t5)">IVF — In Vitro Fertilization ("Test Tube Baby")</h4>
+        <ul class="pts">
+          <li>Ova collected from woman + sperm from man</li>
+          <li>Fertilization OUTSIDE body (in glass dish/test tube)</li>
+          <li>Forms zygote → then transferred</li>
+        </ul>
+      </div>
+      <table class="tbl">
+        <tr><th>Technique</th><th>What is Transferred</th><th>Where</th><th>Stage</th></tr>
+        <tr><td><strong>ZIFT</strong> — Zygote Intrafallopian Transfer</td><td>Zygote</td><td>Fallopian tube</td><td>Up to 8-blastomere stage</td></tr>
+        <tr><td><strong>IUT</strong> — Intra-Uterine Transfer</td><td>Embryo</td><td>Uterus</td><td>More than 8-blastomere stage</td></tr>
+      </table>
+      <div class="star-fact"><span class="ico">⭐</span><div><strong>ZIFT = zygote to fallopian tube; IUT = embryo (>8 cells) to uterus.</strong> Classic exam distinction!</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>💉</span><h2>ICSI — Intracytoplasmic Sperm Injection</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="pts">
+        <li><strong>Used when:</strong> sperm count very low OR sperm can't penetrate ovum</li>
+        <li>A <strong>single sperm</strong> injected directly into the ovum</li>
+        <li>Embryo formed → transferred to uterus</li>
+      </ul>
+      <div class="hi-orange" style="font-size:0.85rem;">🎯 Key phrase: <em>"single sperm injected directly into cytoplasm of ovum"</em></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🎁</span><h2>GIFT — Gamete Intrafallopian Transfer</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="pts">
+        <li>Ova + sperms placed <strong>together</strong> into woman's fallopian tube</li>
+        <li>Fertilization happens <strong>inside</strong> the fallopian tube (not outside)</li>
+        <li><strong>Requires</strong> normal functional fallopian tubes in woman</li>
+      </ul>
+      <div class="star-fact"><span class="ico">⭐</span><div>GIFT ≠ IVF. In GIFT, <strong>gametes</strong> are transferred (not embryo). Fertilization is in vivo (inside body).</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>🏥</span><h2>AI, IUI & Surrogacy</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <table class="tbl">
+        <tr><th>Technique</th><th>Process</th><th>Used When</th></tr>
+        <tr><td><strong>AI</strong> — Artificial Insemination</td><td>Semen introduced into vagina or uterus</td><td>Male cannot deposit semen / low sperm count</td></tr>
+        <tr><td><strong>IUI</strong> — Intrauterine Insemination</td><td>Processed semen (↑ motility) placed directly in uterus</td><td>Advanced form of AI</td></tr>
+        <tr><td><strong>Surrogacy</strong></td><td>Intended couple's embryo placed in surrogate mother's uterus; she carries to term</td><td>Woman cannot maintain pregnancy / repeated miscarriages / absent uterus</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>📋</span><h2>Quick ART Summary Table</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <table class="tbl">
+        <tr><th>ART</th><th>Full Form</th><th>Key Feature</th></tr>
+        <tr><td>IVF</td><td>In Vitro Fertilization</td><td>Fertilization outside body; "test tube baby"</td></tr>
+        <tr><td>ZIFT</td><td>Zygote Intrafallopian Transfer</td><td>Zygote (≤8 cells) → fallopian tube</td></tr>
+        <tr><td>IUT</td><td>Intra-Uterine Transfer</td><td>Embryo (>8 cells) → uterus</td></tr>
+        <tr><td>ICSI</td><td>Intracytoplasmic Sperm Injection</td><td>Single sperm injected into ovum</td></tr>
+        <tr><td>GIFT</td><td>Gamete Intrafallopian Transfer</td><td>Gametes → fallopian tube; in vivo fertilization</td></tr>
+        <tr><td>AI</td><td>Artificial Insemination</td><td>Semen into vagina/uterus</td></tr>
+        <tr><td>IUI</td><td>Intrauterine Insemination</td><td>Processed semen → uterus</td></tr>
+        <tr><td>Surrogacy</td><td>—</td><td>Embryo in surrogate's uterus</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header" onclick="toggle(this)">
+      <span>⚠️</span><h2>Ethical Issues with ARTs</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="chips">
+        <span class="chip chip-red">Emotional & psychological stress</span>
+        <span class="chip chip-red">Legal issues</span>
+        <span class="chip chip-red">Sex selection misuse</span>
+        <span class="chip chip-red">Expensive</span>
+      </div>
+      <div class="hi-purple" style="margin-top:12px;font-size:0.85rem;">NCERT: ARTs need <strong>proper regulation and ethical guidelines</strong>.</div>
+    </div>
+  </div>
+
+</div><!-- /t5 -->
+
+
+<!-- ══════════════ EXAM QUESTIONS TAB ══════════════ -->
+<div id="exam" class="tab-panel">
+
+  <div class="summary-box" style="margin-bottom:20px;">
+    <h3>📝 Probable Exam Questions</h3>
+    <p style="font-size:0.83rem;color:var(--muted);margin-bottom:16px;">Based on NCERT text & previous year patterns</p>
+
+    <div class="sub" style="color:var(--t1)">🌸 Reproductive Health</div>
+    <div class="eq-box"><p><span class="eq-num">Q1</span>Define reproductive health. What are its components according to WHO/NCERT?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q2</span>What are the objectives of RCH (Reproductive and Child Health) programme?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q3</span>Which country was the first to launch a national family planning programme? When?</p></div>
+
+    <div class="sub" style="color:var(--t3)">🛡️ Contraception</div>
+    <div class="eq-box"><p><span class="eq-num">Q4</span>Classify the different contraceptive methods. Give one example of each.</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q5</span>How do copper-releasing IUDs act as contraceptives?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q6</span>Differentiate between vasectomy and tubectomy.</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q7</span>Which is the most widely used IUD in India? What is its mechanism of action?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q8</span>How does lactational amenorrhea act as a contraceptive? What is its limitation?</p></div>
+
+    <div class="sub" style="color:var(--t4)">⚖️ MTP</div>
+    <div class="eq-box"><p><span class="eq-num">Q9</span>What is MTP? Under what conditions is it legally permissible in India?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q10</span>Why is MTP considered significant? What are the risks if done illegally?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q11</span>Explain the connection between MTP and female foeticide. What law prevents it?</p></div>
+
+    <div class="sub" style="color:var(--red)">🦠 STIs</div>
+    <div class="eq-box"><p><span class="eq-num">Q12</span>List any four STIs caused by (a) bacteria (b) viruses. Which of these are curable?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q13</span>Why are early symptoms of STIs often missed? What complications arise if untreated?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q14</span>"Viral STIs cannot be completely cured." Justify this statement with examples.</p></div>
+
+    <div class="sub" style="color:var(--t5)">🔬 ARTs</div>
+    <div class="eq-box"><p><span class="eq-num">Q15</span>Differentiate between ZIFT and IUT with respect to the stage of embryo transferred.</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q16</span>What is ICSI? When is it used? How is it different from IVF?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q17</span>What is GIFT? What condition is necessary for GIFT to be performed?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q18</span>What is surrogacy? In which conditions is it recommended?</p></div>
+    <div class="eq-box"><p><span class="eq-num">Q19</span>Make a table comparing IVF, ZIFT, IUT, GIFT, ICSI, AI, and IUI.</p></div>
+  </div>
+
+  <div class="section open">
+    <div class="section-header" onclick="toggle(this)">
+      <span>⭐</span><h2>High-Yield NCERT Lines to Memorize</h2><span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="star-fact"><span class="ico">🌍</span><div>India was the <strong>first country in the world</strong> to start a national family planning programme (1951).</div></div>
+      <div class="star-fact"><span class="ico">💊</span><div><strong>"Bacterial infections are curable; viral infections cannot be cured completely."</strong></div></div>
+      <div class="star-fact"><span class="ico">🤱</span><div>Lactational amenorrhea works as contraceptive only for <strong>up to 6 months</strong> postpartum.</div></div>
+      <div class="star-fact"><span class="ico">🧪</span><div>ZIFT transfers <strong>zygote (≤8 cells)</strong> to fallopian tube; IUT transfers <strong>embryo (>8 cells)</strong> to uterus.</div></div>
+      <div class="star-fact"><span class="ico">💉</span><div>ICSI = <strong>single sperm injected</strong> directly into cytoplasm of ovum.</div></div>
+      <div class="star-fact"><span class="ico">🎁</span><div>GIFT requires the woman to have <strong>normal functional fallopian tubes</strong>.</div></div>
+      <div class="star-fact"><span class="ico">⚖️</span><div>MTP is legal up to <strong>20 weeks</strong> under the MTP Act, 1971.</div></div>
+      <div class="star-fact"><span class="ico">🚫</span><div>PCPNDT Act (1994) — bans sex determination of foetus to prevent female foeticide.</div></div>
+      <div class="star-fact"><span class="ico">🛡️</span><div>Only <strong>condoms</strong> provide dual protection: contraception + STI prevention.</div></div>
+      <div class="star-fact"><span class="ico">🌀</span><div>IUDs are the <strong>most widely used</strong> contraceptive method in India.</div></div>
+      <div class="star-fact"><span class="ico">⚠️</span><div><strong>"Early symptoms of STIs are either absent or easily overlooked."</strong></div></div>
+    </div>
+  </div>
+
+</div><!-- /exam -->
+
+</div><!-- /content-area -->
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggle(header) {
+    const section = header.parentElement;
+    section.classList.toggle('open');
+  }
+  // Open first section of each tab by default
+  document.querySelectorAll('.tab-panel').forEach(panel => {
+    const first = panel.querySelector('.section');
+    if (first) first.classList.add('open');
+  });
+</script>
+</body>
+</html>
